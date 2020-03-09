@@ -1,0 +1,26 @@
+Package: crystalmeth
+Title: Streamlined Methylation-Based Classification of Tumors
+Version: 0.1
+Authors@R: 
+    person(given = "Christoph",
+           family = "Geisenberger",
+           role = c("aut", "cre"),
+           email = "chrgeisenberger@gmx.de",
+           comment = c(ORCID = "0000-0002-5846-7127"))
+Description: High-throughput (epi)genetic measurements are increasingly being used for diagnostic 
+    decision making. This package offers tools to streamline sample processing and the 
+    creation of diagnostic reports. 
+URL: https://github.com/cgeisenberger/crystalmeth/
+License: CC0
+Encoding: UTF-8
+LazyData: true
+Imports:
+    conumee (>= 1.18.0),
+    tidyverse (>= 1.3.0),
+    stringr (>= 1.4.0),
+    minfi (>= 1.30.0),
+    randomForest (>= 4.6.14),
+    gridExtra (>= 2.3),
+    grid (>= 3.6.0),
+    rmarkdown (>= 2.1)
+RoxygenNote: 7.0.2.9000
