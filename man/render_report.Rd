@@ -23,6 +23,6 @@ Full path of report file.
 }
 \details{
 Use this function to render a diagnostic report as PDF after running the full
-workflow for a \emp{ClassificationCase} object. Internally, render_report generates
+workflow for a \emph{ClassificationCase} object. Internally, render_report generates
 a new environment and and passes the parameters to rmarkdown::render().
 }
