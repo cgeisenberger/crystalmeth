@@ -39,7 +39,7 @@ Since the details around the analysis of array-based DNA methylation data is bey
 
 # How to use the package
 
-Refer to the [package vignette](./included/crystalmeth.pdf) for an in-depth tutorial.
+Refer to the [package vignette](./included/vignette.pdf) for an in-depth tutorial.
 
 
 
