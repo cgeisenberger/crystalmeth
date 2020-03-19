@@ -1,6 +1,6 @@
 ---
 title: "The *crystalmeth* vignette"
-output: rmarkdown::pdf_document
+output: rmarkdown::html_vignette
 author: "Christoph Geisenberger"
 date: "`r Sys.Date()`"
 vignette: >
