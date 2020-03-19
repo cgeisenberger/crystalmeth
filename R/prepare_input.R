@@ -25,8 +25,7 @@
 #'  \item{green_only}{Basenames of cases with missing RED channel data}
 #'  \item{red_only}{Basenames of cases with missing GREEN channel data}
 #'  \item{cases}{Basenames of cases with correctly paired IDAT files}
-
-
+#' @export
 
 scan_directory <- function(dir){
 
@@ -76,6 +75,7 @@ scan_directory <- function(dir){
 #'
 #' @param obj Output of \code{scan_directory}
 #' @return Vector with file names or basenames (see above)
+#' @export
 
 get_all <- function(obj){
   return(obj[["all"]])
@@ -83,6 +83,7 @@ get_all <- function(obj){
 
 
 #' @rdname get_all
+#' @export
 
 get_invalid <- function(obj){
   return(obj[["invalid"]])
@@ -90,18 +91,21 @@ get_invalid <- function(obj){
 
 
 #' @rdname get_all
+#' @export
 get_green_only <- function(obj){
   return(obj[["green_only"]])
 }
 
 
 #' @rdname get_all
+#' @export
 get_red_only <- function(obj){
   return(obj[["red_only"]])
 }
 
 
 #' @rdname get_all
+#' @export
 get_cases <- function(obj){
   return(obj[["cases"]])
 }

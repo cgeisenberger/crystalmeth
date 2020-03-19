@@ -11,7 +11,7 @@
 #' @param out_dir Output directory of report.
 #' @param out_file Name of output file, objects basename if unspecified (Default: NULL).
 #' @return Full path of report file.
-
+#' @export
 
 render_report <- function(case, template, out_dir, out_file = NULL){
 

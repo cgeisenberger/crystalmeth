@@ -103,7 +103,7 @@ is futher used to investigate whether the files have the same no. of probes. In 
 the array type is guessed based on the number of probes. If any of these steps should go wrong,
 the program records an error code to help narrow down the problem.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ClassificationCase$validate()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ClassificationCase$validate(verbose = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

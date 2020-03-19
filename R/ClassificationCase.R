@@ -3,7 +3,7 @@
 #' @description
 #' ClassificationCase provides a coherent structure to keep all information
 #' of one diagnostic case used for methylation prediction within a single object.
-
+#' @export
 
 ClassificationCase <- R6::R6Class("ClassificationCase",
                               public = list(
@@ -87,7 +87,7 @@ ClassificationCase <- R6::R6Class("ClassificationCase",
                                 #' the program records an error code to help narrow down the problem.
                                 #' @param verbose Print informative messages (Boolean, default: TRUE).
                                 #' Inherits from \code{\link{ClassificationCase$new}}.
-                                validate = function() {
+                                validate = function(verbose = TRUE) {
                                   # check if supplied basename is valid
                                   if (length(self$basename) != 1) {
                                     self$terminate(error_code = "101")
