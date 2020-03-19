@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Christoph Geisenberger" />
+
+<meta name="date" content="2020-03-19" />
+
+<title>The crystalmeth vignette</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">The <em>crystalmeth</em> vignette</h1>
+<h4 class="author">Christoph Geisenberger</h4>
+<h4 class="date">2020-03-19</h4>
+
+
+
+<div id="loading-data" class="section level1">
+<h1>Loading data</h1>
+<p>Let’s begin with loading the required packages.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(crystalmeth)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<p>Currently, crystalmeth only supports reading data directly from IDAT files. This is because some of the functionalities (such as creating copy-number plots) need access to raw fluorescence measurements. For the purpose of the tutorial let’s assume we have a folder with the following files:</p>
+<pre><code>.
++-- temp
+|   +-- input_data
+|       +-- Screenshot 2020-01-04 at 18.20.12.png
+|       +-- README.md
+|       +-- GSM3319212_3999941101_R04C02_Grn.idat
+|       +-- GSM3319210_3999941101_R02C02_Red.idat
+|       +-- GSM3319211_3999941101_R03C02_Red.idat
+|       +-- GSM3319210_3999941101_R02C02_Grn.idat
+|       +-- GSM2309170_200134080018_R03C01_Red.idat
+|       +-- GSM2309170_200134080018_R03C01_Grn.idat</code></pre>
+<p>Some of the files do not have the correct input format, and others are missing either the Red.idat or Grn.idat file. Let’s use <code>scan_directory()</code> to find the cases with proper input data:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">input_dir &lt;-<span class="st"> &quot;../temp/input_data/&quot;</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">files &lt;-<span class="st"> </span><span class="kw">scan_directory</span>(<span class="dt">dir =</span> input_dir)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co"># get_cases() will extract the basenames with matching _Red.idat and _Grn.idat files</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">basenames &lt;-<span class="st"> </span>files <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">get_cases</span>()</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">basenames</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; [1] &quot;GSM2309170_200134080018_R03C01&quot; &quot;GSM3319210_3999941101_R02C02&quot;</span></a></code></pre></div>
+<p>As you can see, only the two complete cases are listed. It’s time to set up our workflow. The next step will be to create new instances of the <code>ClassificationCase</code> class. The idea behind using a dedicated class is to keep all information pertaining to a sample in the same place. Furthermore, this design creates an opportunity to for easy parallelization, in case it should be necessary to process large numbers of samples.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Let's create a new Classification case object for one of the cases</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">case &lt;-<span class="st"> </span>ClassificationCase<span class="op">$</span><span class="kw">new</span>(<span class="dt">basename =</span> basenames[<span class="dv">1</span>], <span class="dt">path =</span> input_dir)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co"># messages are suppressed in this code chunk</span></a></code></pre></div>
+<blockquote>
+<p>NB: Because every sample is self-contained within an object, certain preprocessing functions cannot be used. However, in our experience, these differences are negligible when it comes to the classification results.</p>
+</blockquote>
+</div>
+<div id="data-processing" class="section level1">
+<h1>Data processing</h1>
+<p>After creating the object, we will need to run multiple steps in order to produce data for a sample report. These are: 1. Reading data from IDAT files 2. Perform preprocessing 3. Impute missing data 4. Classify the sample 5. Estimate tumor purity 6. Create a copy-number profile</p>
+<p>It is helpful to dig into some details here. There are currently multiple different algorithms to perform background normalization. While some of them are slightly better at removing unwanted technical variation, these differences are negligible when it comes to the classification results. The default setting is <code>minfi::minfi::preprocessIllumina()</code> which we recommend. In addition, some classifiers are not able to deal with missing data. This means that a single CpG without data can render the sample un-classifiable. Therefore, missing data is imputed. The current standard is to sample randomly from the data points which are <em>not</em> missing. In our experience, classification results are stable up to 20% (!) missing data. This measurement is therefore reported in the PDF.</p>
+<blockquote>
+<p>NB: The current implementation of crystalmeth only supports randomForest models. However, we are planning &gt; to make a wider range of machine learning models available in future releases.</p>
+</blockquote>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">load</span>(<span class="st">&quot;../temp/NetID_v1.RData&quot;</span>) <span class="co"># load net_id_v1 (randomForest classifier)</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co"># this command will run the full workflow</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">case<span class="op">$</span><span class="kw">run_workflow</span>(<span class="dt">rf_object =</span> net_id_v1)</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co"># messages are suppressed in this code chunk</span></a></code></pre></div>
+</div>
+<div id="generage-diagnostic-report" class="section level1">
+<h1>Generage diagnostic report</h1>
+<p>As a last step, most clinical user probably want to generate reports for diagnostic cases. Crystalmeth offers a handy wrapper around <code>rmarkdown::render</code> to achieve this. Please note that a <em>template file</em> is needed for this purpose. While not part of the package, refer to the <a href>GitHub Readme</a> for more information.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">output_directory =<span class="st"> &quot;../temp/reports/&quot;</span> </a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">template_path =<span class="st"> &quot;../temp/netid_report.Rmd&quot;</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co"># note that render_report() returns the location(s) of the output files</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">out_files &lt;-<span class="st"> </span><span class="kw">render_report</span>(case, <span class="dt">template =</span> template_path, <span class="dt">out_dir =</span> output_directory)</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; /Applications/RStudio.app/Contents/MacOS/pandoc/pandoc +RTS -K512m -RTS netid_report.utf8.md --to latex --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/cge/Dropbox/Research/software/crystalmeth/temp/reports/GSM2309170_200134080018_R03C01.tex --self-contained --highlight-style tango --pdf-engine pdflatex --variable graphics --lua-filter /Library/Frameworks/R.framework/Versions/3.6/Resources/library/rmarkdown/rmd/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/3.6/Resources/library/rmarkdown/rmd/lua/latex-div.lua</span></a></code></pre></div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
