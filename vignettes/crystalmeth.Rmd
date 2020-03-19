@@ -1,6 +1,6 @@
 ---
 title: "The *crystalmeth* vignette"
-output: rmarkdown::html_vignette
+output: rmarkdown::pdf_document
 author: "Christoph Geisenberger"
 date: "`r Sys.Date()`"
 vignette: >
@@ -102,7 +102,7 @@ output_directory = "../temp/reports/"
 template_path = "../temp/netid_report.Rmd"
 
 # note that render_report() returns the location(s) of the output files
-out_files <- render_report(case, template = template_path, out_dir = output_directory)
+#out_files <- render_report(case, template = template_path, out_dir = output_directory)
 ```
 
 
