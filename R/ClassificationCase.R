@@ -262,9 +262,25 @@ ClassificationCase <- R6::R6Class("ClassificationCase",
                                                   IlluminaHumanMethylationEPIC = get("NormalControlsEpic"),
                                                   IlluminaHumanMethylation450k = get("NormalControls450k"))
 
-                                  # run conumee workflow
+                                  # prepare query and reference samples
                                   sample <- conumee::CNV.load(self$normalized_data)
                                   ctrls <- conumee::CNV.load(ctrls)
+
+                                  # extract probe information for anno, query and reference data
+                                  probes_anno <- names(anno@probes)  # ordered by location
+                                  probes_query <- rownames(sample@intensity)
+                                  probes_ref <- rownames(ctrls@intensity)
+
+                                  # if no. of probes doesn't match, throw warning and filter
+                                  # this is cause by slightly different numbers of probes
+                                  # in different releases of the EPIC array
+                                  if (!all(probes_anno %in% probes_query)) {
+                                    warning("Different EPIC platforms, filtering probes for CNV calling")
+                                    probes_common <- Reduce(f = intersect, x = list(probes_anno, probes_query, probes_ref))
+                                    anno@probes <- anno@probes[probes_common, ]
+                                  }
+
+                                  # fit CNV object with updated annotation
                                   cnv_fit <- conumee::CNV.fit(query = sample, ref = ctrls, anno = anno)
                                   cnv_binned <- conumee::CNV.bin(cnv_fit)
                                   self$cnv <- conumee::CNV.segment(cnv_binned)
@@ -315,7 +331,7 @@ ClassificationCase <- R6::R6Class("ClassificationCase",
                                   self$get_betas(verbose = verbose)
                                   self$impute_data(verbose = verbose)
                                   self$run_classification(rf_object = rf_object, verbose = verbose)
-                                  self$prepare_cnv(verbose = verbose)
                                   self$estimate_purity(verbose = verbose)
+                                  self$prepare_cnv(verbose = verbose)
                                 })
 )
