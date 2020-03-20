@@ -4,7 +4,7 @@
 \alias{render_report}
 \title{Render diagnostic report for ClassificationCase object}
 \usage{
-render_report(case, template, out_dir, out_file = NULL)
+render_report(case, template, out_dir, out_file = NULL, out_type = "pdf")
 }
 \arguments{
 \item{case}{Object of type ClassificationCase.}
@@ -14,6 +14,8 @@ render_report(case, template, out_dir, out_file = NULL)
 \item{out_dir}{Output directory of report.}
 
 \item{out_file}{Name of output file, objects basename if unspecified (Default: NULL).}
+
+\item{out_type}{Output file type (html or pdf, Default: pdf)}
 }
 \value{
 Full path of report file.
@@ -24,5 +26,7 @@ Full path of report file.
 \details{
 Use this function to render a diagnostic report as PDF after running the full
 workflow for a \emph{ClassificationCase} object. Internally, render_report generates
-a new environment and and passes the parameters to rmarkdown::render().
+a new environment and and passes the parameters to rmarkdown::render(). Output reports can be
+rendered as HTML or PDF files. Please note: if out_file extension does not match out_type,
+out_type takes precedence and will change the extension.
 }
