@@ -18,7 +18,7 @@ get_basename <- function(file){
     } else if (base::grepl(pattern = "_Red.idat$", x = file)) {
       basename <- stringr::str_remove(file, pattern = "_Red.idat$")
     } else {
-      error("Unknown file type, must contain suffix _Grn.idat or _Red.idat")
+      stop("Unknown file type, must contain suffix _Grn.idat or _Red.idat")
     }
   }
   return(unname(basename))
