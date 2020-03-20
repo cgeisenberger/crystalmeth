@@ -39,7 +39,37 @@ Since the details around the analysis of array-based DNA methylation data is bey
 
 # How to use the package
 
-Refer to the [package vignette](./included/vignette.pdf) for an in-depth tutorial.
+
+## Minimal Examples
+
+```{r}
+library(tidyverse)
+
+# running the workflow requires a randomForest object
+# and a .rmd template to generate the report
+# both are not included with the package
+load("./temp/NetID_v1.RData")
+
+# scan directory for IDAT files
+input_dir <- "./temp/problem_files/"
+files <- scan_directory(dir = input_dir)
+basenames <- files %>% get_cases()
+example <- basenames[1]
+
+# process one example case
+case <- ClassificationCase$new(basename = example, path = input_dir)
+case$run_workflow(rf_object = net_id_v1, verbose = TRUE)
+
+# generate diagnostic report
+test_out <- render_report(case,
+                          template = "./temp/netid_report.Rmd",
+                          out_dir = "./temp/reports/",
+                          out_type = "pdf")
+```
+
+## Tutorial
+
+For a more thorough walkthrough, consult the [package vignette](./included/vignette.pdf).
 
 
 
