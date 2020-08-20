@@ -97,9 +97,10 @@ impute_random <- function(mat){
     return(list(imputed = mat, n = na_num))
   } else {
     na_pos <- is.na(mat)
+    na_names <- rownames(mat)[na_pos]
     na_num <- sum(na_pos)
     mat[na_pos] <- sample(x = mat[!na_pos], size = na_num, replace = TRUE)
-    return(list(imputed = mat, n = na_num))
+    return(list(imputed = mat, n = na_num, probes = na_names))
   }
 }
 
