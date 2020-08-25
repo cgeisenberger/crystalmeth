@@ -383,9 +383,9 @@ ClassificationCase <- R6::R6Class("ClassificationCase",
                                   purity_absolute <- round(purity_absolute * 100, digits = 2)
                                   purity_estimate <- round(purity_estimate * 100, digits = 2)
 
-                                  # save data
-                                  self$purity = list(absolute = unname(purity_absolute),
-                                                     estimate = unname(purity_estimate))
+                                  # save data as tibble
+                                  self$purity = tibble(method = c("ABSOLUTE", "ESTIMATE"),
+                                                       purity = c(purity_absolute, purity_estimate))
 
                                   if (verbose) message("Tumor purity estimation completed")
                                   invisible(self)
