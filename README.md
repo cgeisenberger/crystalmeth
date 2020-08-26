@@ -79,6 +79,7 @@ render_report(case = case,
               output_dir = "./testing/test-data/")
 ```
 
+The report created for this sample can be viewed [here]("./GSM2309170_200134080018_R03C01.html")
 
 
 ## More information
