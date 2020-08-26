@@ -79,7 +79,7 @@ render_report(case = case,
               output_dir = "./testing/test-data/")
 ```
 
-The report created for this sample can be viewed [here]("./readme/GSM2309170_200134080018_R03C01.html")
+The report created for this sample can be viewed [here](https://htmlpreview.github.io/?https://github.com/cgeisenberger/crystalmeth/blob/master/readme/GSM2309170_200134080018_R03C01.html)
 
 
 ## More information
