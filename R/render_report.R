@@ -8,6 +8,7 @@
 #' @param output_format Output directory (passed to rmarkdown::render).
 #' @param output_file Name of output file (passed to rmarkdown::render).
 #' @param output_dir Output directory of rendered file (passed to rmarkdown::render).
+#' @return Returns path of rendered file.
 #' @export
 
 render_report <- function(case, ...){
@@ -17,5 +18,8 @@ render_report <- function(case, ...){
   assign(x = "case", value = case$clone(), envir = report_env)
 
   # render report
-  rmarkdown::render(envir = report_env, ...)
+  out_file <- rmarkdown::render(envir = report_env, ...)
+
+  # return path of output file
+  return(out_file)
 }
