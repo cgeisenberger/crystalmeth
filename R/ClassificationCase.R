@@ -261,10 +261,10 @@ ClassificationCase <- R6::R6Class("ClassificationCase",
                                 #' @description
                                 #' Classify tumor sample
                                 #' @param verbose Print helpful messages (default: TRUE)
-                                #' @param rf_object RandomForest predictor object
-                                run_classification = function(rf_object, verbose = TRUE) {
+                                #' @param rf_model RandomForest predictor object
+                                run_classification = function(rf_model, verbose = TRUE) {
                                   # copy classifier into object
-                                  self$class_algorithm <- rf_object
+                                  self$class_algorithm <- rf_model
                                   # extract variables
                                   vars <- get_rf_variables(self$class_algorithm)
                                   # select beta values
@@ -397,12 +397,13 @@ ClassificationCase <- R6::R6Class("ClassificationCase",
                                 #' @param verbose Print helpful messages (default: TRUE)
                                 #' @param rf_object RandomForest predictor object. Passed to
                                 #' run_classification()
-                                run_workflow = function(rf_object, verbose = TRUE) {
+                                run_full_workflow = function(rf_model, calibration_model, verbose = TRUE) {
                                   self$load_data(verbose = verbose)
                                   self$normalize_data(verbose = verbose)
                                   self$get_betas(verbose = verbose)
                                   self$impute_data(verbose = verbose)
-                                  self$run_classification(rf_object = rf_object, verbose = verbose)
+                                  self$run_classification(rf_model = rf_model, verbose = verbose)
+                                  self$calibrate_scores(calibration_model = calibration_model, verbose = verbose)
                                   self$estimate_purity(verbose = verbose)
                                   self$prepare_cnv(verbose = verbose)
                                 })
