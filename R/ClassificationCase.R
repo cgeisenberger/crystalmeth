@@ -397,6 +397,8 @@ ClassificationCase <- R6::R6Class("ClassificationCase",
                                 #' @param verbose Print helpful messages (default: TRUE)
                                 #' @param rf_object RandomForest predictor object. Passed to
                                 #' run_classification()
+                                #' @param calibration_model Model for score calibration. Passed
+                                #' to calibrate_scores()
                                 run_full_workflow = function(rf_model, calibration_model, verbose = TRUE) {
                                   self$load_data(verbose = verbose)
                                   self$normalize_data(verbose = verbose)
