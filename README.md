@@ -44,34 +44,44 @@ Since the details around the analysis of array-based DNA methylation data is bey
 # How to use the package
 
 
-## Minimal Examples
+## Example Data
+
+All data to run the minimal example can be downloaded via this [Dropbox link](https://www.dropbox.com/s/tub92yz8gig7hdk/20200826_test_data_nen_id.zip?dl=0).
+
+
+## Example Workflow
 
 ```{r}
+# load necessary libraries
 library(tidyverse)
+library(crystalmeth)
 
-# running the workflow requires a randomForest object
-# and a .rmd template to generate the report
-# both are not included with the package
-load("./temp/NetID_v1.RData")
+# load data (see section 'Example Data' above)
+rf_model <- readRDS(file = "./testing/test-data/rf_model.RDS")
+ridge_model <- readRDS(file = "./testing/test-data/calibration_model.RDS")
 
-# scan directory for IDAT files
-input_dir <- "./temp/problem_files/"
-files <- scan_directory(dir = input_dir)
-basenames <- files %>% get_cases()
-example <- basenames[1]
+# detect input data (IDAT files)
+input_dir <- "./testing/test-data/"
+idats <- scan_directory(dir = input_dir)
+example <- idats %>% get_cases()
 
-# process one example case
-case <- ClassificationCase$new(basename = example, path = input_dir)
-case$run_workflow(rf_object = net_id_v1, verbose = TRUE)
+# process case
+case <- ClassificationCase$new(basename = example,
+                               path = input_dir,
+                               verbose = TRUE)
+case$run_full_workflow(rf_model = rf_model,
+                       calibration_model = ridge_model)
 
-# generate diagnostic report
-test_out <- render_report(case,
-                          template = "./temp/netid_report.Rmd",
-                          out_dir = "./temp/reports/",
-                          out_type = "pdf")
+# render report
+render_report(case = case,
+              input = "./testing/test-data/nen_id_template_html.Rmd",
+              output_file = paste0(case$array_basename, ".html"),
+              output_dir = "./testing/test-data/")
 ```
 
-## Tutorial
+
+
+## More information
 
 For a more thorough walkthrough, consult the [package vignette](./included/vignette.pdf).
 
