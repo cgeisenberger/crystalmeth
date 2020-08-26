@@ -12,18 +12,22 @@ devtools::install_github("cgeisenberger/crystalmeth")
 
 ### Motivation 
 
-The recent explosion in development of high-throughput techniques in biology has created
-many opportunities to apply these techniques in a clinical setting. Among these, DNA methylation
-profiling has shown great promise, especially in the field of molecular pathology. This is primarily
-facilitated by the availability of array-based platforms, which have technical characteristics 
-and a low pricepoint which make them especially suited for this purpose. There are now multiple 
-publications (such as [Capper et al., 2018](https://www.nature.com/articles/nature26000)), which 
-provide compelling evidence that array-based DNA methylation profiling of tumors can augment
-(or arguably even replace) microscopy-based histopathology. This has led to the recommendation
-by the WHO to perform methylation-based profiling for a number of well-characterized brain tumor 
-entities. It seems highly likely that this approach which has been spearheaded by the neuropathological
-community will soon be used in many other tumor entities aswell. This has prompted us to develop 
-a software package which allows users to perform tasks related to methylation-based classification
+DNA methylation is increasingly being used as a diagnostic tool. This is 
+facilitated by array-based platforms such as Illuminas *450k* array
+and its successor, the *EPIC* platform. The research community has produced
+a number of classifiers which are able to determine tissue of origin and / or 
+tumor subclass solely based on DNA methylation data as input.  
+
+[Capper et al.](https://www.nature.com/articles/nature26000)) provide compelling
+evidence that array-based DNA methylation profiling of tumors can augment
+(or arguably even replace) microscopy-based histopathology.
+This has led to the recommendation by the WHO to perform methylation-based
+profiling for a number of well-characterized brain tumor entities.
+
+It seems highly likely that this approach which has been spearheaded by the
+neuropathological community will soon be used in other tumor entities.
+This has prompted us to develop a software package which allows users to
+perform tasks related to methylation-based classification
 in a coherent framework that is scalable and can be deployed as a web application. 
 
 
