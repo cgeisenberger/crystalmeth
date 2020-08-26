@@ -18,7 +18,7 @@ and its successor, the *EPIC* platform. The research community has produced
 a number of classifiers which are able to determine tissue of origin and / or 
 tumor subclass solely based on DNA methylation data as input.  
 
-[Capper et al.](https://www.nature.com/articles/nature26000)) provide compelling
+[Capper et al.](https://www.nature.com/articles/nature26000) provide compelling
 evidence that array-based DNA methylation profiling of tumors can augment
 (or arguably even replace) microscopy-based histopathology.
 This has led to the recommendation by the WHO to perform methylation-based
