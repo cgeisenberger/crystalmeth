@@ -33,9 +33,9 @@ in a coherent framework that is scalable and can be deployed as a web applicatio
 
 ### Primer on DNA Methylation Data
 
-Crystalmeth is designed to work with array-based methylation data. Obtainng raw data by measuring fluorescence on the physical slides in Illumina scanners produces **two output files**. These start with the same sample ID (referred to as **basename** hereafter) and end with either `_Red.idat` or `_Grn.idat`.
+`Crystalmeth` is designed to work with array-based methylation data. Raw data is obtained by measuring fluorescence for **two different dyes** on the physical slides in Illumina scanners. Raw data therefore consists of two matched files which end with either `_Red.idat` or `_Grn.idat`. The preceding characters correspond to the sample ID, which is also referred to as **basename** (example: *201533570046_R01C01_Grn.idat*).
 
-In addition to the biological signal, multiple technical sources can add noise to the measurements. After loading the raw data, **normalization** can mitigate some of these effects. After normalizing, data can be extracted. While methylation is a binary state on the single-CpG level, methylation arrays measure the average across all different cell populations present in the (bulk) input material. This average is referred to as **beta value** and ranges between 0 and 1, representing unmethylated and fully methylated loci, respectively. 
+In addition to the biological signal, multiple technical sources can add noise to the measurements. **Normalization** can mitigate some of these effects. For a given cytosine base, methylation is usually expressed as a percentage. This measure is also referred to as **beta value**. While DNA methylation is binary state on the single-nucleotide level, arrays measure the average across all different cell populations present in the (bulk) input material. Beta values can therefore take any value between 0 and 1 (however, samples show a clear bimodal distribution with most probes being either or fully methylated or unmethylated). 
 
 Since the details around the analysis of array-based DNA methylation data is beyond the scope of this vignette, we would like to point readers towards the [minfi R package](https://bioconductor.org/packages/release/bioc/html/minfi.html) developed by [Kasper Daniel Hansen](http://www.hansenlab.org). It provides more information about the fundamentals of DNA methylation data analysis and is also used as the backbone for sample preprocessing in this software package.
 
@@ -46,7 +46,7 @@ Since the details around the analysis of array-based DNA methylation data is bey
 
 ## Example Data
 
-All data to run the minimal example can be downloaded via this [Dropbox link](https://www.dropbox.com/s/tub92yz8gig7hdk/20200826_test_data_nen_id.zip?dl=0).
+Data to reproduce the example below can be downloaded via this [Dropbox link](https://www.dropbox.com/s/tub92yz8gig7hdk/20200826_test_data_nen_id.zip?dl=0).
 
 
 ## Example Workflow
